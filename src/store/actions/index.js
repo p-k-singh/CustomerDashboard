@@ -1,0 +1,1 @@
+export {setCustomerName,setPickupAddress,setPickupPin,setDestinationAddress,setDestinationPin,setHeight,setWidth,setLength,setUnit,setNumberOfUnits,setWeightPerUnit,setCompanyName,setEmail,setPhoneNumber} from './order';
