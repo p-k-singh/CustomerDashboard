@@ -19,6 +19,10 @@ const initialState={
 const reducer=(state=initialState,action)=>{
     switch(action.type)
     {
+        case actionTypes.RESET_STATE:
+            return{
+                initialState
+            }
         case actionTypes.SET_NAME:
             return {
                 ...state,

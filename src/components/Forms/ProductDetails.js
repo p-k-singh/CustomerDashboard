@@ -110,7 +110,7 @@ const ProductDimensions = (props) => {
             <form className={classes.form}>
                 <Typography className={classes.formHeadings}>Product Weight and Unit</Typography>
                 <Grid container spacing={3} style={{ padding: 50, paddingTop: 10, paddingBottom: 30 }}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             type="number"
@@ -123,7 +123,7 @@ const ProductDimensions = (props) => {
                             onChange={(event)=>onNumberOfUnitsChangeController(event)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             type="number"
                             id="weight"
@@ -139,30 +139,31 @@ const ProductDimensions = (props) => {
 
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <FormControl className={classes.formControl}>
-                            <InputLabel htmlFor="age-native-simple">Unit</InputLabel>
-                            <Select
-                                native
-                                //value="inches"
-                                onChange={unitChangeController}
-                                inputProps={{
-                                    name: 'age',
-                                    id: 'age-native-simple',
-                                }}
-                            >
-                                <option aria-label="None" value="" />
-                                <option value={"meter"}>Meter</option>
-                                <option value={"inches"}>Inches</option>
-                                <option value={"centimeters"}>Centimeters</option>
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                    
                 </Grid>
                 <Typography className={classes.formHeadings}>Dimensions</Typography>
                 <Grid container spacing={3} style={{ padding: 50, paddingTop:10 }}>
+                    <Grid item xs={12} sm={6}>
+                            <FormControl className={classes.formControl}>
+                                <InputLabel htmlFor="age-native-simple">Unit</InputLabel>
+                                <Select
+                                    native
+                                    //value="inches"
+                                    onChange={unitChangeController}
+                                    inputProps={{
+                                        name: 'age',
+                                        id: 'age-native-simple',
+                                    }}
+                                >
+                                    <option aria-label="None" value="" />
+                                    <option value={"meter"}>Meter</option>
+                                    <option value={"inches"}>Inches</option>
+                                    <option value={"centimeters"}>Centimeters</option>
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             type="number"
@@ -175,7 +176,7 @@ const ProductDimensions = (props) => {
                             onChange={(event)=>onHeightChangeController(event)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             type="number"
                             id="width"
@@ -187,7 +188,7 @@ const ProductDimensions = (props) => {
                             onChange={(event)=>onWidthChangeController(event)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             type="number"

@@ -15,3 +15,5 @@ export const SET_UNIT='SET_UNIT';
 export const SET_HEIGHT='SET_HEIGHT';
 export const SET_WIDTH='SET_WIDTH';
 export const SET_LENGTH='SET_LENGTH';
+
+export const RESET_STATE='RESET_STATE';

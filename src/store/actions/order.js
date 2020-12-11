@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 
 
+export const resetState=()=>{
+    return{
+        type:actionTypes.RESET_STATE
+    }
+}
+
 export const setCustomerName=(name)=>{
     return{
         type:actionTypes.SET_NAME,

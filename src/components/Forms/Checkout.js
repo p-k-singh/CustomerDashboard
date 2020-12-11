@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 import SelectInput from '@material-ui/core/Select/SelectInput';
 import {Redirect} from 'react-router'
 import { DesktopWindows } from '@material-ui/icons';
+import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles({
     root: {
@@ -68,28 +69,24 @@ function SimpleCard(props) {
                     toPin:props.destinationPin,
                     fromPin:props.pickupPin,
                     customerEmail:props.email,
-                    noOfUnits:props.noOfUnits,
-                    weightPerUnit:props.weightPerUnit,
-                    height:props.height,
-                    width:props.width,
-                    breadth:props.length,
+                    noOfUnits:parseInt(props.noOfUnits),
+                    weightPerUnit:parseFloat(props.weightPerUnit),
+                    height:parseFloat(props.height),
+                    width:parseFloat(props.width),
+                    breadth:parseFloat(props.length),
                     unit:props.unit
                 }]
         }
         axios.post(url,data)
         .then(resp=>{
             console.log(resp.data);
+            //console.log(data);
+            props.onresetState();
+            setClicked(true);
         })
         .catch(err=>{
             console.log(err);
         })
-
-        /*alert("Pickup address is : "+props.pickupAddress + "\nPickup ZipCode: "+props.pickupPin +"\nDestination address: "+props.destinationAddress
-        +"\nDestination pin: "+props.destinationPin+"\nNumber of units: "+props.unit+"\nWeight per unit: "+props.weightPerUnit+
-        "\nUnit of measurement: "+props.unit+"\nLength: "+props.length+"\nWidth: "+props.width+"\nHeight: "+props.height+
-        "\nName: "+props.name+"\nPhone number: "+props.phone+"\nEmail: "+props.email+"\nCompany name: "+props.companyName);
-        window.location.reload();
-        //setClicked(true);*/
     }
     let redirect=null;
     if(clicked==true)
@@ -162,6 +159,12 @@ const mapStateToProps=state=>{
         companyName:state.companyName
     }
 }
+const mapDispatchToProps=dispatch=>{
+    return {
+        onresetState:()=>dispatch(actions.resetState()),
+        
+    };
+}
 
 
-export default connect(mapStateToProps)(SimpleCard);
+export default connect(mapStateToProps,mapDispatchToProps)(SimpleCard);
