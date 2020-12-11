@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 import {
     Card,
     Button,
@@ -58,29 +59,37 @@ function SimpleCard(props) {
     }
 
     const handleOrderClick=()=>{
-        /*console.log("Pickup Address: "+props.pickupAddress);
-        console.log("Pickup ZipCode: "+props.pickupPin);
-        console.log("Destination address: "+props.destinationAddress);
-        console.log("Destination pin: "+props.destinationPin);
-        console.log("Number of units: "+props.unit );
-        console.log("Weight per unit: "+props.weightPerUnit);
-        console.log("Unit of measurement: "+props.unit);
-        console.log("Length: "+props.length);
-        console.log("Width: "+props.width);
-        console.log("Height: "+props.height);
-        console.log("Name: "+props.name);
-        console.log("Phone number: "+props.phone);
-        console.log("Email: "+props.email);
-        console.log("Company name: "+props.companyName);*/
+        const url='https://2n3n7swm8f.execute-api.ap-south-1.amazonaws.com/draft0/customerorder'
+        const data={
+            customerOrders:[
+                {   
+                    toAddress:props.destinationAddress,
+                    fromAddress:props.pickupAddress,
+                    toPin:props.destinationPin,
+                    fromPin:props.pickupPin,
+                    customerEmail:props.email,
+                    noOfUnits:props.noOfUnits,
+                    weightPerUnit:props.weightPerUnit,
+                    height:props.height,
+                    width:props.width,
+                    breadth:props.length,
+                    unit:props.unit
+                }]
+        }
+        axios.post(url,data)
+        .then(resp=>{
+            console.log(resp.data);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
 
-        alert("Pickup address is : "+props.pickupAddress + "\nPickup ZipCode: "+props.pickupPin +"\nDestination address: "+props.destinationAddress
+        /*alert("Pickup address is : "+props.pickupAddress + "\nPickup ZipCode: "+props.pickupPin +"\nDestination address: "+props.destinationAddress
         +"\nDestination pin: "+props.destinationPin+"\nNumber of units: "+props.unit+"\nWeight per unit: "+props.weightPerUnit+
         "\nUnit of measurement: "+props.unit+"\nLength: "+props.length+"\nWidth: "+props.width+"\nHeight: "+props.height+
         "\nName: "+props.name+"\nPhone number: "+props.phone+"\nEmail: "+props.email+"\nCompany name: "+props.companyName);
-
         window.location.reload();
-        
-        //setClicked(true);
+        //setClicked(true);*/
     }
     let redirect=null;
     if(clicked==true)
