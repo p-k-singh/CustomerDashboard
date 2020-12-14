@@ -11,9 +11,8 @@ import CustomerDetails from './CustomerDetails';
 import {connect} from 'react-redux';
 import SelectInput from '@material-ui/core/Select/SelectInput';
 import {Redirect} from 'react-router'
-import { DesktopWindows } from '@material-ui/icons';
 import * as actions from '../../store/actions/index';
-
+import WaveLoader from '../UI/WaveLoader';
 const useStyles = makeStyles({
     root: {
         // minWidth: 275,
@@ -31,6 +30,7 @@ const useStyles = makeStyles({
     }
 });
  
+
 const steps = 3;
 
 function getStepContent(step) {
@@ -51,6 +51,7 @@ function SimpleCard(props) {
     //Handle Page Change
     const [activeStep, setactiveStep] = useState(0)
     const [clicked,setClicked]=useState(false)
+    const [loading,setLoading]=useState(false);
 
     const handleNextClick = () => {
         setactiveStep(activeStep + 1);
@@ -60,6 +61,7 @@ function SimpleCard(props) {
     }
 
     const handleOrderClick=()=>{
+        setLoading(true);
         const url='https://2n3n7swm8f.execute-api.ap-south-1.amazonaws.com/draft0/customerorder'
         const data={
             customerOrders:[
@@ -82,6 +84,7 @@ function SimpleCard(props) {
             console.log(resp.data);
             //console.log(data);
             props.onresetState();
+            setLoading(false);
             setClicked(true);
         })
         .catch(err=>{
@@ -93,8 +96,8 @@ function SimpleCard(props) {
     {
         redirect=<Redirect to="/"></Redirect>;
     }
-    return (
-        <Card className={classes.root}>
+    let content=
+    <Card className={classes.root}>
             {redirect}
             {getStepContent(activeStep)}
             <div
@@ -114,7 +117,7 @@ function SimpleCard(props) {
                     style={{marginRight:'5px'}}
                 >
                     Back
-              </Button>
+            </Button>
                 )}
                 {activeStep !== 2 && (
                     
@@ -124,7 +127,7 @@ function SimpleCard(props) {
                     onClick={handleNextClick}
                 >
                     Next
-              </Button>
+            </Button>
                 )}
                 {/* TODO add Orderhandler */}
                 {activeStep === 2&&(
@@ -137,7 +140,16 @@ function SimpleCard(props) {
                     </Button>
                 )}
             </div>
-        </Card>
+        </Card>;
+
+        if(loading==true)
+        {
+            content=<WaveLoader/>;
+        }
+    return (
+        <div>
+            {content}
+        </div>
     );
 }
 
