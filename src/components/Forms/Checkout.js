@@ -13,6 +13,7 @@ import SelectInput from '@material-ui/core/Select/SelectInput';
 import {Redirect} from 'react-router'
 import * as actions from '../../store/actions/index';
 import WaveLoader from '../UI/WaveLoader';
+import Spinner from '../UI/Spinner';
 const useStyles = makeStyles({
     root: {
         // minWidth: 275,
@@ -82,7 +83,7 @@ function SimpleCard(props) {
         axios.post(url,data)
         .then(resp=>{
             console.log(resp.data);
-            //console.log(data);
+            
             props.onresetState();
             setLoading(false);
             setClicked(true);
@@ -144,7 +145,12 @@ function SimpleCard(props) {
 
         if(loading==true)
         {
-            content=<WaveLoader/>;
+            content=
+            <div class="jumbotron text-center">
+                <h1 class="display-4">Thank You!</h1>
+                <p class="lead"><strong>Redirecting you to dashboard</strong> where you can check your order</p>
+                <Spinner/>
+            </div>
         }
     return (
         <div>

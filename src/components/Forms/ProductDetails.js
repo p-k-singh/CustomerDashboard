@@ -141,7 +141,7 @@ const ProductDimensions = (props) => {
                     </Grid>
                     
                 </Grid>
-                <Typography className={classes.formHeadings}>Dimensions</Typography>
+                <Typography className={classes.formHeadings}>Dimensions per unit</Typography>
                 <Grid container spacing={3} style={{ padding: 50, paddingTop:10 }}>
                     <Grid item xs={12} sm={6}>
                             <FormControl className={classes.formControl}>
@@ -156,7 +156,6 @@ const ProductDimensions = (props) => {
                                     }}
                                 >
                                     <option aria-label="None" value="" />
-                                    <option value={"meter"}>Meter</option>
                                     <option value={"inches"}>Inches</option>
                                     <option value={"centimeters"}>Centimeters</option>
                                 </Select>

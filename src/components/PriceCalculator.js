@@ -3,11 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import WaveLoader from './UI/WaveLoader';
+import Spinner from './UI/Spinner';
 import axios from 'axios';
+import Select from '@material-ui/core/Select';
 import {
   TextField,
   Grid,
   Card,
+  FormControl,
+  InputLabel,
   FormControlLabel,
   Checkbox,
   Divider,
@@ -40,6 +44,8 @@ const PriceCalculator = (props) => {
   const [width,setWidth]=useState(0);
   const [breadth,setBreadth]=useState(0);
   const [pickuppin, setpickuppin] = useState(0);
+  const [unit,setUnit]=useState('centimeters');
+  const [volWeight,setVolWeight]=useState(0);
   const [destinationpin, setdestinationpin] = useState(0);
   const [loader,setLoader]=useState(false);
   const [estimatedPrice,setEstimatedPrice]=useState(0);
@@ -61,6 +67,18 @@ const PriceCalculator = (props) => {
   {
       return /^\d+(\.\d{1,2})?$/.test(dimension);
   }*/
+
+  function roundHalf(num) { return (Math.round(num*2)/2).toFixed(1); }
+
+  const unitChangeController=(event)=>{
+        var unitOfProduct=event.target.value;
+        setUnit(unitOfProduct);
+        if(unitOfProduct=="centimeters")
+            setVolWeight(parseFloat(width)*parseFloat(height)*parseFloat(breadth)/5000);
+        else if(unitOfProduct=="inches")
+            setVolWeight(parseFloat(width)*parseFloat(height)*parseFloat(breadth)/138.4);
+    }
+
   const onPickupZipChangeController=(event)=>{
       var pickupPinCode=event.target.value;
       setpickuppin(pickupPinCode);
@@ -76,15 +94,29 @@ const PriceCalculator = (props) => {
   const onHeightChangeController=(event)=>{
         var heightOfProduct=event.target.value;
         setHeight(heightOfProduct);
+        if(unit=="centimeters")
+            setVolWeight(parseFloat(heightOfProduct)*parseFloat(width)*parseFloat(breadth)/5000);
+        else if(unit=="inches")
+            setVolWeight(parseFloat(heightOfProduct)*parseFloat(width)*parseFloat(breadth)/138.4);
+
     }
 
     const onWidthChangeController=(event)=>{
         var widthOfProduct=event.target.value;
         setWidth(widthOfProduct);
+        if(unit=="centimeters")
+            setVolWeight(parseFloat(widthOfProduct)*parseFloat(height)*parseFloat(breadth)/5000);
+        else if(unit=="inches")
+            setVolWeight(parseFloat(widthOfProduct)*parseFloat(height)*parseFloat(breadth)/138.4);
+
     }
     const onBreadthChangeController=(event)=>{
         var breadthOfProduct=event.target.value;
         setBreadth(breadthOfProduct);
+        if(unit=="centimeters")
+            setVolWeight(parseFloat(breadthOfProduct)*parseFloat(width)*parseFloat(height)/5000);
+        else if(unit=='inches')
+            setVolWeight(parseFloat(breadthOfProduct)*parseFloat(width)*parseFloat(height)/138.4);
     }
 
   const handleCalculateClick=()=>{
@@ -115,9 +147,27 @@ const PriceCalculator = (props) => {
                             Price Calculator
                         </Typography>
                         <form>
-                                    <Typography className={classes.formHeadings} >Product Details</Typography>
-                                    <Grid container spacing={3} style={{ padding: 50, paddingTop:10 }}>
-                                                <Grid item xs={12} sm={4}>
+                                <Typography className={classes.formHeadings} >Product Details</Typography>
+                                    <Grid container spacing={3} style={{ paddingRight:50,paddingLeft:50,paddingBottom:20, paddingTop:10 }}>
+                                        <Grid item xs={12} sm={3}>
+                                            <FormControl className={classes.formControl}>
+                                                <InputLabel htmlFor="age-native-simple">Unit</InputLabel>
+                                                <Select
+                                                    native
+                                                    value={unit}
+                                                    onChange={unitChangeController}
+                                                    inputProps={{
+                                                        name: 'age',
+                                                        id: 'age-native-simple',
+                                                    }}
+                                                >
+                                                    <option aria-label="None" value="" />
+                                                    <option value={"inches"}>Inches</option>
+                                                    <option value={"centimeters"}>Centimeters</option>
+                                                </Select>
+                                            </FormControl>
+                                        </Grid>
+                                                <Grid item xs={12} sm={3}>
                                                     <TextField
                                                         required
                                                         type="number"
@@ -128,9 +178,10 @@ const PriceCalculator = (props) => {
                                                         value={height}
                                                         autoComplete="Height"
                                                         onChange={(event)=>onHeightChangeController(event)}
+                                                        
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={4}>
+                                                <Grid item xs={12} sm={3}>
                                                     <TextField
                                                         type="number"
                                                         id="width"
@@ -142,7 +193,7 @@ const PriceCalculator = (props) => {
                                                         onChange={(event)=>onWidthChangeController(event)}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12} sm={4}>
+                                                <Grid item xs={12} sm={3}>
                                                     <TextField
                                                         required
                                                         type="number"
@@ -157,6 +208,8 @@ const PriceCalculator = (props) => {
                                                 </Grid>
                                             </Grid>
                                         
+                                        <Typography className={classes.formHeadings} >Volumetric Weight: {isNaN(volWeight)?0:volWeight} {unit=="centimeters"?"kg":"pounds"}</Typography>
+
                                         <Typography className={classes.formHeadings} >Location Details</Typography>
                                         <Grid container spacing={3} style={{ padding: 50, paddingTop: 20 ,paddingBottom: 30 }}>
                                             <Grid item xs={12} sm={6}>
@@ -209,7 +262,12 @@ const PriceCalculator = (props) => {
                 </Card>;
                 
                 if(loader==true)
-                content=<WaveLoader/>;
+                {
+                    content=<div class="jumbotron text-center">
+                                <p class="lead"><strong>Calculating estimated cost</strong></p>
+                                <Spinner/>
+                            </div>
+                }
 
                 var priceContent=null;
                 if(showPrice==true)
