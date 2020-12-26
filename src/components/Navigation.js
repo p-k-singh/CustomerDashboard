@@ -16,6 +16,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 import LocalAtmSharpIcon from '@material-ui/icons/LocalAtmSharp';
+import AddIcon from '@material-ui/icons/Add';
+
 import {
     ListItem,
     ListItemText,
@@ -116,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
     const list = [
         { title: 'Dashboard', to: '/', icon: <DashboardIcon/> },
-        { title: 'Place Orders', to: '/orders', icon: <AddShoppingCartIcon/> },
+        { title: 'My Orders', to: '/myorders', icon: <AddShoppingCartIcon/> },
         {title: 'Price Calculator', to: '/price-calculator', icon: <LocalAtmSharpIcon/>},
     ]
     const classes = useStyles();
@@ -144,8 +146,11 @@ export default function Dashboard() {
                         <MenuIcon />
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        GoFlexe
+                       GoFlexe
+
           </Typography>
+          <Link to='/orders' style={{ color: 'white',fontWeight:'bold',textDecoration:'none',fontSize:'15px' }}><AddIcon/> New Order</Link>
+
                 </Toolbar>
             </AppBar>
             <Drawer

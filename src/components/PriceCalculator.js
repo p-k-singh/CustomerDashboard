@@ -73,9 +73,9 @@ const PriceCalculator = (props) => {
   const unitChangeController=(event)=>{
         var unitOfProduct=event.target.value;
         setUnit(unitOfProduct);
-        if(unitOfProduct=="centimeters")
+        if(unitOfProduct==="centimeters")
             setVolWeight(parseFloat(width)*parseFloat(height)*parseFloat(breadth)/5000);
-        else if(unitOfProduct=="inches")
+        else if(unitOfProduct==="inches")
             setVolWeight(parseFloat(width)*parseFloat(height)*parseFloat(breadth)/138.4);
     }
 

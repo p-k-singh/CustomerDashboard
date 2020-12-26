@@ -6,7 +6,10 @@ import Navigation from './components/Navigation'
 import Home from './components/Home'
 import Form from './components/Forms/Checkout'
 import PriceCalculator from './components/PriceCalculator'
-
+import Success from './components/OrderStatus/orderSuccess'
+import Failure from './components/OrderStatus/orderFailure'
+import MyOrders from './components/MyOrders/MyOrders'
+import OrderDetail from './components/OrderDetail'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -41,6 +44,12 @@ function App() {
           <Route exact path="/" component={Home} />
           {/* Order Form */}
           <Route exact path="/orders" component={Form} />
+          <Route exact path="/myorders" component={MyOrders} />
+          <Route exact path="/orderSuccess" component={Success} />
+          <Route exact path="/orderFailure" component={Failure} />
+          <Route path='/order/:id' render={(props) => {
+                    return ( <OrderDetail {...props } /> )
+                }} />
           {/* Price Calculator */}
           <Route exact path="/price-calculator" component={PriceCalculator} />
         </Switch>

@@ -7,11 +7,7 @@ import * as actions from '../../store/actions/index';
 
 import {
   TextField,
-  Grid,
-  FormControlLabel,
-  Checkbox,
-  Divider,
-  InputAdornment
+  Grid
 } from '@material-ui/core'
 const useStyles = makeStyles({
   root: {
