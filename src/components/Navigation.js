@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,10 +14,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
+import PersonIcon from '@material-ui/icons/Person';
 import LocalAtmSharpIcon from '@material-ui/icons/LocalAtmSharp';
 import AddIcon from '@material-ui/icons/Add';
-
+import Button from '@material-ui/core/Button';
+import yellow from "@material-ui/core/colors/yellow";
 import {
     ListItem,
     ListItemText,
@@ -113,6 +114,17 @@ const useStyles = makeStyles((theme) => ({
     fixedHeight: {
         height: 240,
     },
+    containedPurple: {
+        color: theme.palette.getContrastText(yellow[500]),
+        backgroundColor: yellow[700],
+        "&:hover": {
+          backgroundColor: yellow[900],
+          // Reset on touch devices, it doesn't add specificity
+          "@media (hover: none)": {
+            backgroundColor: yellow[500]
+          }
+        }
+      },
 }));
 
 export default function Dashboard() {
@@ -120,6 +132,7 @@ export default function Dashboard() {
         { title: 'Dashboard', to: '/', icon: <DashboardIcon/> },
         { title: 'My Orders', to: '/myorders', icon: <AddShoppingCartIcon/> },
         {title: 'Price Calculator', to: '/price-calculator', icon: <LocalAtmSharpIcon/>},
+        {title: 'My Profile', to: '/price-calculator', icon: <PersonIcon/>}
     ]
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
@@ -148,9 +161,12 @@ export default function Dashboard() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                        GoFlexe
 
-          </Typography>
-          <Link to='/orders' style={{ color: 'white',fontWeight:'bold',textDecoration:'none',fontSize:'15px' }}><AddIcon/> New Order</Link>
+          </Typography> 
+            <Button variant="contained" className={classes.containedPurple} color="#ffff32" href="/orders">
+            New order
+            </Button>
 
+            
                 </Toolbar>
             </AppBar>
             <Drawer
