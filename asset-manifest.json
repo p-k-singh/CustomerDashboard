@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/CustomerDashboard/static/css/main.fc8db89e.chunk.css",
-    "main.js": "/CustomerDashboard/static/js/main.57f99016.chunk.js",
-    "main.js.map": "/CustomerDashboard/static/js/main.57f99016.chunk.js.map",
+    "main.js": "/CustomerDashboard/static/js/main.b8750a9d.chunk.js",
+    "main.js.map": "/CustomerDashboard/static/js/main.b8750a9d.chunk.js.map",
     "runtime-main.js": "/CustomerDashboard/static/js/runtime-main.5baf342b.js",
     "runtime-main.js.map": "/CustomerDashboard/static/js/runtime-main.5baf342b.js.map",
-    "static/js/2.252d010d.chunk.js": "/CustomerDashboard/static/js/2.252d010d.chunk.js",
-    "static/js/2.252d010d.chunk.js.map": "/CustomerDashboard/static/js/2.252d010d.chunk.js.map",
+    "static/js/2.9e84a321.chunk.js": "/CustomerDashboard/static/js/2.9e84a321.chunk.js",
+    "static/js/2.9e84a321.chunk.js.map": "/CustomerDashboard/static/js/2.9e84a321.chunk.js.map",
     "static/js/3.d8856dbe.chunk.js": "/CustomerDashboard/static/js/3.d8856dbe.chunk.js",
     "static/js/3.d8856dbe.chunk.js.map": "/CustomerDashboard/static/js/3.d8856dbe.chunk.js.map",
     "index.html": "/CustomerDashboard/index.html",
     "static/css/main.fc8db89e.chunk.css.map": "/CustomerDashboard/static/css/main.fc8db89e.chunk.css.map",
-    "static/js/2.252d010d.chunk.js.LICENSE.txt": "/CustomerDashboard/static/js/2.252d010d.chunk.js.LICENSE.txt"
+    "static/js/2.9e84a321.chunk.js.LICENSE.txt": "/CustomerDashboard/static/js/2.9e84a321.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5baf342b.js",
-    "static/js/2.252d010d.chunk.js",
+    "static/js/2.9e84a321.chunk.js",
     "static/css/main.fc8db89e.chunk.css",
-    "static/js/main.57f99016.chunk.js"
+    "static/js/main.b8750a9d.chunk.js"
   ]
 }
